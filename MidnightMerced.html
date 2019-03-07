@@ -1,0 +1,58 @@
+<canvas id="ctx" width="1900" height="900" style="border:1px solid #000000"></canvas>
+
+<script>
+  var ctx = document.getElementById("ctx").getContext("2d");
+  ctx.font = '30px Arial';
+  var width =1900;
+  var height = 900;
+
+  //ufo
+  var ufo = {
+    x:950,
+    y:450,
+    name:'U',
+  };
+  //cow list
+  var cowList = {};
+  //cow
+  var cow = {
+    x: 950,
+    sx: 10,
+    y: 870,
+    sy: 0,
+    name: 'C',
+    id: 'C0',
+  };
+
+  cowList['C0'] = cow;
+
+  setInterval(update,40);
+
+  function updatePlayer(){
+
+  }
+
+  function updateEnemy(input){
+    //cow logic
+    ctx.fillText(input.name,input.x,input.y);
+    input.x += input.sx;
+    if(input.x > width){
+      input.x = width;
+      input.sx = -input.sx;
+    }
+    if(input.x < 0){
+      input.x = 0;
+      input.sx = -cow.sx;
+    }
+    //ctx.fillText(input.name,input.x,input.y);
+  }
+  function update(){
+    ctx.clearRect(0,0,width,height);
+    updatePlayer();
+
+    for(var id in cowList){
+      updateEnemy(cowList[id]);
+    }
+
+  }
+</script>
